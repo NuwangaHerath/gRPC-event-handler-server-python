@@ -2,16 +2,24 @@ import grpc
 
 from concurrent import futures
 import logging
-
+from datetime import datetime
 import service_pb2, service_pb2_grpc
 
 
 class Service(service_pb2_grpc.serviceServicer):
 
+    now = datetime.now() # current date and time
+    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+    print("date and time:",date_time)
+
     def getName(self, request, context):
 
+        now = datetime.now() # current date and time
+        date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+        print("date and time:",date_time)
+
         print("\n----getName method is called-----\n")
-        return service_pb2.HandlerName(name=f'{"customEvent"}')
+        return service_pb2.HandlerName(name="grpcBasedEventHandler")
 
     def getPriority(self, request, context):
 
@@ -19,12 +27,15 @@ class Service(service_pb2_grpc.serviceServicer):
         return service_pb2.Priority(priority=58)
 
     def handleEvent(self, request, context):
+        now = datetime.now() # current date and time
+        date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+        print("date and time:",date_time)
         print("\n----handlerEvent method is called-----\n")
 
         if request.event=="PRE_ADD_USER":
-            return service_pb2.Log(log=f'{"testing PRE_ADD_USER event on Python grpc server"}')
+            return service_pb2.Log(log=f'{"testing PRE_ADD_USER event using GrpcEventHandler on Python gRPC server"}')
         if request.event=="POST_ADD_USER":
-            return service_pb2.Log(log=f'{"testing POST_ADD_USER event on Python grpc server"}')
+            return service_pb2.Log(log=f'{"testing POST_ADD_USER event using GrpcEventHandler on Python gRPC server"}')
 
 
 def serve():
