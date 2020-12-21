@@ -31,11 +31,12 @@ class Service(service_pb2_grpc.serviceServicer):
         date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
         print("date and time:",date_time)
         print("\n----handlerEvent method is called-----\n")
+        print(request.eventProperties["user-name"])
 
         if request.event=="PRE_ADD_USER":
-            return service_pb2.Log(log=f'{"testing PRE_ADD_USER event using GrpcEventHandler on Python gRPC server"}')
+            return service_pb2.Log(log=f'{"testing PRE_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"]}')
         if request.event=="POST_ADD_USER":
-            return service_pb2.Log(log=f'{"testing POST_ADD_USER event using GrpcEventHandler on Python gRPC server"}')
+            return service_pb2.Log(log=f'{"testing POST_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"]}')
 
 
 def serve():
