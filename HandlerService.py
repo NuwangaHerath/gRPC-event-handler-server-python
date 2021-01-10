@@ -56,9 +56,9 @@ def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     service_pb2_grpc.add_serviceServicer_to_server(Service(), server)
     #server.add_insecure_port('[::]:8010')
-    server.add_secure_port('[::]:8020', loadCredentials())
+    server.add_secure_port('[::]:8010', loadCredentials())
     server.start()
-    print("Server starts at port :8020")
+    print("Server starts at port :8010")
     server.wait_for_termination()
 
 
