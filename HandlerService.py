@@ -17,7 +17,7 @@ class Service(service_pb2_grpc.serviceServicer):
         print("date and time:", date_time)
 
         print("----getName method is called-----\n")
-        return service_pb2.HandlerName(name="grpcBasedEventHandler")
+        return service_pb2.HandlerName(name="grpcBasedEventHandlerPython")
 
     def getPriority(self, request, context):
         print("----getPriority method is called-----\n")
@@ -31,9 +31,9 @@ class Service(service_pb2_grpc.serviceServicer):
         print("UserName: " + request.eventProperties["user-name"])
         print("TenantDomain: " + request.eventProperties["tenant-domain"])
 
-        if request.event == "POST_ADD_USER":
+        if request.event == "PRE_ADD_USER":
             return service_pb2.Log(
-                log=f'{"testing POST_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"]}')
+                log=f'{"testing PRE_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"]}')
 
 
 def loadCredentials():
