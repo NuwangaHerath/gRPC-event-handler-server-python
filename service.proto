@@ -2,20 +2,8 @@ syntax = "proto3";
 option java_package = "handler";
 
 service service{
-  rpc getName(Empty) returns (HandlerName){};
-  rpc getPriority(MessageContext) returns (Priority){};
   rpc handleEvent(Event) returns (Log){};
 }
-
-message HandlerName{
-  string  name = 1;
-}
-
-message Priority{
-  int32 priority = 1;
-}
-
-message MessageContext{}
 
 message Event{
   string  event = 1;
@@ -25,5 +13,3 @@ message Event{
 message Log{
   string log = 1;
 }
-
-message Empty{}

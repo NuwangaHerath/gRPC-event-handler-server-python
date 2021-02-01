@@ -32,8 +32,14 @@ class Service(service_pb2_grpc.serviceServicer):
         print("TenantDomain: " + request.eventProperties["tenant-domain"])
 
         if request.event == "PRE_ADD_USER":
+            print("testing PRE_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"])
             return service_pb2.Log(
                 log=f'{"testing PRE_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"]}')
+
+        if request.event == "POST_ADD_USER":
+            print("testing POST_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"])
+            return service_pb2.Log(
+                log=f'{"testing POST_ADD_USER event using GrpcEventHandler on Python gRPC server with UserName- " + request.eventProperties["user-name"] + ", TenantDomain- " + request.eventProperties["tenant-domain"]}')
 
 
 def loadCredentials():
